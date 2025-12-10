@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer';
+import AuthorButton from '../components/AuthorButton';
+import { SimpleToaster } from '../components/SimpleToaster';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Blog' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background">
+      <AuthorButton client:load />
+      
+      <slot />
+      
+      <Footer />
+      <SimpleToaster client:load />
+    </div>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin '@tailwindcss/typography';
 
 
 @custom-variant dark (&:where(.dark &));
@@ -117,6 +118,14 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-mono);
+  }
+}
+
+@layer typography {
+  .prose {
+    /* --tw-prose-body: oklch(0.626, 0.00625, 266.785); */
+    --tw-prose-body: oklch(0.673 0.034 259.733);
+    --tw-prose-headings: white;
   }
 }
 

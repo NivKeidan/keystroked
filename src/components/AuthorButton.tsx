@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -26,6 +27,9 @@ const AuthorButton = () => {
           <DialogTitle className="font-mono text-xl flex items-center gap-2">
             <span className="text-primary">~/</span>about_me
           </DialogTitle>
+          <DialogDescription className="sr-only">
+            Information about the author and developer behind this blog
+          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-6 py-4">

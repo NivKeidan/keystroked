@@ -1,98 +1,118 @@
 ---
-import '../styles/global.css';
-
+import { getCollection } from 'astro:content';
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import FeaturedPost from "../components/FeaturedPost";
 import PostCard from "../components/PostCard";
-import AuthorButton from "../components/AuthorButton";
-import { featuredPost, recentPosts } from "../posts/posts";
+
+const sortedPosts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// First post is featured, rest are recent
+const featuredPostData = sortedPosts[0];
+const recentPostsData = sortedPosts.slice(1);
+
+// Format featured post
+const featuredPost = featuredPostData ? {
+  slug: featuredPostData.id,
+  title: featuredPostData.data.title,
+  excerpt: featuredPostData.data.excerpt,
+  date: featuredPostData.data.pubDate.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  }),
+  readTime: featuredPostData.data.readTime,
+  asciiArt: featuredPostData.data.asciiArt,
+  tags: featuredPostData.data.tags,
+} : null;
+
+// Format recent posts
+const recentPosts = recentPostsData.map(post => ({
+  slug: post.id,
+  title: post.data.title,
+  excerpt: post.data.excerpt,
+  date: post.data.pubDate.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  }),
+  readTime: post.data.readTime,
+  asciiArt: post.data.asciiArt,
+  tags: post.data.tags,
+}));
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<div class="min-h-screen bg-background">
-      <Header />
-      <AuthorButton />
+<BaseLayout title="Blog">
+	<Header />
+	<main class="container mx-auto px-6 py-12 2xl:w-[1400px]">
+	{/* Hero Section */}
+	<section class="mb-16 fade-in">
+		<div class="max-w-2xl">
+		<h1 class="text-4xl md:text-5xl font-mono font-bold text-foreground mb-4">
+			Thoughts on{" "}
+			<span class="text-primary text-glow-green">code</span>,{" "}
+			<span class="text-terminal-amber text-glow-amber">design</span>, and
+			everything in between.
+		</h1>
+		<p class="text-lg text-muted-foreground leading-relaxed">
+			A personal collection of technical deep-dives, design explorations,
+			and lessons learned while building things on the internet.
+		</p>
+		</div>
+	</section>
 
-      <main class="container mx-auto px-6 py-12 2xl:w-[1400px]">
-        {/* Hero Section */}
-        <section class="mb-16 fade-in">
-          <div class="max-w-2xl">
-            <h1 class="text-4xl md:text-5xl font-mono font-bold text-foreground mb-4">
-              Thoughts on{" "}
-              <span class="text-primary text-glow-green">code</span>,{" "}
-              <span class="text-terminal-amber text-glow-amber">design</span>, and
-              everything in between.
-            </h1>
-            <p class="text-lg text-muted-foreground leading-relaxed">
-              A personal collection of technical deep-dives, design explorations,
-              and lessons learned while building things on the internet.
-            </p>
-          </div>
-        </section>
+	{/* Featured Post Section */}
+	<section class="mb-16">
+		<div class="flex items-center gap-3 mb-6">
+		<span class="font-mono text-sm text-primary">~/featured</span>
+		<div class="flex-1 h-px bg-border" />
+		</div>
+		{featuredPost && <FeaturedPost {...featuredPost} />}
+	</section>
 
-        {/* Featured Post Section */}
-        <section class="mb-16">
-          <div class="flex items-center gap-3 mb-6">
-            <span class="font-mono text-sm text-primary">~/featured</span>
-            <div class="flex-1 h-px bg-border" />
-          </div>
-          <FeaturedPost {...featuredPost} />
-        </section>
+	{/* Recent Posts Grid */}
+	<section>
+		<div class="flex items-center gap-3 mb-8">
+		<span class="font-mono text-sm text-primary">~/recent</span>
+		<div class="flex-1 h-px bg-border" />
+		<a
+			href="#"
+			class="font-mono text-sm text-muted-foreground hover:text-primary transition-colors"
+		>
+			View all →
+		</a>
+		</div>
 
-        {/* Recent Posts Grid */}
-        <section>
-          <div class="flex items-center gap-3 mb-8">
-            <span class="font-mono text-sm text-primary">~/recent</span>
-            <div class="flex-1 h-px bg-border" />
-            <a
-              href="#"
-              class="font-mono text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              View all →
-            </a>
-          </div>
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+		{recentPosts.map((post, index) => (
+			<PostCard key={index} {...post} delay={index + 1} />
+		))}
+		</div>
+	</section>
 
-          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {recentPosts.map((post, index) => (
-              <PostCard key={index} {...post} delay={index + 1} />
-            ))}
-          </div>
-        </section>
-
-        {/* Newsletter CTA */}
-        <section class="mt-20 fade-in" style={{ animationDelay: "0.8s" }}>
-          <div class="terminal-box p-8 md:p-12 text-center">
-            <h2 class="text-2xl font-mono font-semibold text-foreground mb-3">
-              $ subscribe --newsletter
-            </h2>
-            <p class="text-muted-foreground mb-6 max-w-md mx-auto">
-              Get notified when I publish something new. No spam, just quality
-              content delivered to your inbox.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="you@email.com"
-                class="flex-1 px-4 py-3 bg-secondary border border-border rounded-lg font-mono text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-              />
-              <button class="px-6 py-3 bg-primary text-primary-foreground font-mono text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <Footer />
-    </div>
-	</body>
-</html>
+	{/* Newsletter CTA */}
+	<section class="mt-20 fade-in" style={{ animationDelay: "0.8s" }}>
+		<div class="terminal-box p-8 md:p-12 text-center">
+		<h2 class="text-2xl font-mono font-semibold text-foreground mb-3">
+			$ subscribe --newsletter
+		</h2>
+		<p class="text-muted-foreground mb-6 max-w-md mx-auto">
+			Get notified when I publish something new. No spam, just quality
+			content delivered to your inbox.
+		</p>
+		<div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+			<input
+			type="email"
+			placeholder="you@email.com"
+			class="flex-1 px-4 py-3 bg-secondary border border-border rounded-lg font-mono text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+			/>
+			<button class="px-6 py-3 bg-primary text-primary-foreground font-mono text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">
+			Subscribe
+			</button>
+		</div>
+		</div>
+	</section>
+	</main>
+</BaseLayout>

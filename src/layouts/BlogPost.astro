@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import PostCard from '../components/PostCard';
+import AsciiArt from '../components/AsciiArt';
+import ShareButtons from '../components/ShareButtons';
+import { Badge } from '../components/ui/badge';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { type CollectionEntry } from 'astro:content';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, slug, excerpt, pubDate, readTime, asciiArt, tags } = Astro.props;
+
+// Format date
+const formattedDate = pubDate.toLocaleDateString('en-US', { 
+  month: 'short', 
+  day: 'numeric', 
+  year: 'numeric' 
+});
+
+// Get related posts (exclude current post, get 2 others)
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+  .filter(post => post.id !== slug)
+  .slice(0, 2)
+  .map(post => ({
+    slug: post.id,
+    title: post.data.title,
+    excerpt: post.data.excerpt,
+    date: post.data.pubDate.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric' 
+    }),
+    readTime: post.data.readTime,
+    asciiArt: post.data.asciiArt,
+    tags: post.data.tags,
+  }));
+
+// Get current URL for sharing
+const currentUrl = Astro.url;
+---
+
+<BaseLayout title={`dev_log | ${title}`}>
+  <header class="border-b border-border">
+    <div class="container mx-auto px-6 py-4 2xl:w-[1400px]">
+      <a href="/" class="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-4 group">
+        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+        <span class="font-mono text-sm">Back to posts</span>
+      </a>
+
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+          <span class="flex items-center gap-1.5">
+            <Calendar className="w-4 h-4" />
+            {formattedDate}
+          </span>
+          <span class="flex items-center gap-1.5">
+            <Clock className="w-4 h-4" />
+            {readTime}
+          </span>
+        </div>
+        <h1 class="font-mono text-3xl md:text-4xl font-bold text-foreground mb-6">{title}</h1>
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <Badge key={tag} variant="secondary" className="font-mono text-xs">{tag}</Badge>
+          ))}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container mx-auto px-6 py-8 2xl:w-[1400px]">
+    <div class="max-w-3xl mx-auto">
+      <div class="terminal-box p-6 mb-12">
+        <AsciiArt art={asciiArt} />
+      </div>
+    </div>
+  </div>
+  <div class="mainymain">
+    <article class="container mx-auto px-6 pb-16 2xl:w-[1400px]">
+      <div class="prose max-w-3xl mx-auto">
+        <slot />
+      </div>
+
+      <div class="max-w-3xl mx-auto mt-12 pt-8 border-t border-border">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <span class="font-mono text-sm text-muted-foreground">Share this post:</span>
+          <ShareButtons 
+            client:load 
+            title={title} 
+            url={currentUrl.href} 
+          />
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <section class="border-t border-border bg-muted/20">
+    <div class="container mx-auto px-6 py-8 2xl:w-[1400px]">
+      <h2 class="font-mono text-xl font-bold text-foreground mb-4">Related Posts</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        {relatedPosts.map((post) => (
+          <PostCard 
+            key={post.slug} 
+            slug={post.slug}
+            title={post.title}
+            excerpt={post.excerpt}
+            date={post.date}
+            readTime={post.readTime}
+            asciiArt={post.asciiArt}
+            tags={post.tags}
+            compact
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
