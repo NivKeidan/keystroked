@@ -123,9 +123,9 @@
 
 @layer typography {
   .prose {
-    /* --tw-prose-body: oklch(0.626, 0.00625, 266.785); */
-    --tw-prose-body: oklch(0.673 0.034 259.733);
-    --tw-prose-headings: white;
+    /* --tw-prose-body: oklch(0.673 0.034 259.733); */
+    --tw-prose-body: text-zinc-300;
+    --tw-prose-headings: text-white;
   }
 }
 
