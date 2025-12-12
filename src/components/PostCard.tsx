@@ -29,7 +29,7 @@ const PostCard = ({
       {/* ASCII Art Header */}
       {!compact && (
         <div className="p-4 pb-0">
-          <AsciiArt art={asciiArt} />
+          <AsciiArt art={asciiArt} size="sm" />
         </div>
       )}
 
@@ -40,7 +40,7 @@ const PostCard = ({
           {tags.slice(0, compact ? 2 : tags.length).map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 text-xs font-mono bg-secondary text-muted-foreground rounded"
+              className="px-2 py-0.5 text-xs font-mono bg-forest text-white rounded"
             >
               {tag}
             </span>

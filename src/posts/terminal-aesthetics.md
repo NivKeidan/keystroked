@@ -6,11 +6,11 @@ pubDate: Nov 28, 2024
 readTime: 5 min
 asciiArt: |
    ┏━━━━━━━━━━━━━━━━━━━━┓
-   ┃   ◎ DATABASE      ┃
+   ┃     DATABASE       ┃
    ┣━━━━━━━━━━━━━━━━━━━━┫
-   ┃  ├─ users         ┃
-   ┃  ├─ posts         ┃
-   ┃  └─ comments      ┃
+   ┃  ├─ users          ┃
+   ┃  ├─ posts          ┃
+   ┃  └─ comments       ┃
    ┗━━━━━━━━━━━━━━━━━━━━┛
 tags:
   - Design
@@ -29,7 +29,7 @@ Before graphical user interfaces, there were terminals. Green phosphor screens g
 
 These constraints bred elegance. With limited pixels and colors, designers focused on what mattered: readability and information density.
 
-![terminal-history]
+![Vintage terminal interface](https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=600&fit=crop)
 
 ## Principles of Terminal Aesthetics
 
@@ -65,7 +65,7 @@ Modern monospace fonts offer the best of both worlds: the rhythm of terminal typ
 
 Pay attention to font features. Ligatures can enhance code readability. Distinct characters (1, l, I, 0, O) prevent confusion.
 
-![typography]
+![Monospace typography](https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=600&fit=crop)
 
 ### Animation and Interaction
 

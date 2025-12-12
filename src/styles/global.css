@@ -17,6 +17,7 @@
   --color-foreground: hsl(var(--foreground));
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-forest: hsl(var(--forest-green));
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
   --color-destructive: hsl(var(--destructive));
@@ -64,6 +65,8 @@
     --primary: 142 70% 50%;
     --primary-foreground: 220 20% 6%;
 
+    --forest-green: 141 19% 29%;
+
     --secondary: 220 15% 15%;
     --secondary-foreground: 60 10% 90%;
 
@@ -88,6 +91,7 @@
     --terminal-cyan: 185 70% 55%;
     --glow-green: 0 0 20px hsl(142 70% 50% / 0.3);
     --glow-amber: 0 0 20px hsl(45 90% 55% / 0.3);
+    --blog-content-background: rgb(249, 242, 236);
 
     --font-mono: 'JetBrains Mono', monospace;
     --font-sans: 'Inter', sans-serif;
@@ -121,12 +125,8 @@
   }
 }
 
-@layer typography {
-  .prose {
-    /* --tw-prose-body: oklch(0.673 0.034 259.733); */
-    --tw-prose-body: text-zinc-300;
-    --tw-prose-headings: text-white;
-  }
+@utility blog-content {
+  background-color: var(--blog-content-background);
 }
 
 @utility terminal-text {
@@ -212,8 +212,6 @@
 
 @utility container {
   padding: 2rem;
-  /* margin-inline: auto; */
-  /* padding-inline: 2rem; */
 }
 
 @keyframes blink {

@@ -24,7 +24,7 @@ const FeaturedPost = ({
     <div className="flex flex-col lg:flex-row gap-8">
       {/* ASCII Art Section */}
       <div className="lg:w-2/5">
-        <AsciiArt art={asciiArt} className="h-full" />
+        <AsciiArt art={asciiArt} size="sm" />
       </div>
 
       {/* Content Section */}
@@ -32,7 +32,7 @@ const FeaturedPost = ({
         <div>
           {/* Featured Badge */}
           <div className="flex items-center gap-2 mb-4">
-            <span className="px-3 py-1 text-xs font-mono bg-primary/20 text-primary rounded-full border border-primary/30">
+            <span className="px-3 py-1 text-xs font-mono bg-forest text-white rounded-full border border-primary/30">
               ★ Featured
             </span>
             {tags.map((tag) => (

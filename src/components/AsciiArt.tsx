@@ -1,14 +1,20 @@
 interface AsciiArtProps {
   art: string;
-  className?: string;
+  size?: "sm" | "base" | "lg";
 }
 
-const AsciiArt = ({ art, className = "" }: AsciiArtProps) => {
+const AsciiArt = ({ art, size = "base" }: AsciiArtProps) => {
+  const sizeClasses = {
+    sm: "text-[8px] leading-[10px] p-2",
+    base: "text-[10px] leading-[12px] p-3",
+    lg: "text-[14px] leading-[18px] p-4 md:text-[16px] md:leading-[20px]",
+  };
+
   return (
-    <div className={`ascii-container p-4 bg-secondary/50 rounded-lg overflow-hidden ${className}`}>
-      <pre className="text-primary/80 group-hover:text-primary transition-colors duration-300">
-        {art}
-      </pre>
+    <div 
+      className={`inline-block rounded-lg bg-secondary/50 border border-border font-mono whitespace-pre overflow-x-auto text-primary/80 ${sizeClasses[size]}`}
+    >
+      {art}
     </div>
   );
 };

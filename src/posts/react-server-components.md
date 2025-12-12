@@ -6,11 +6,11 @@ pubDate: Dec 5, 2024
 readTime: 6 min
 asciiArt: |
    ╔═══════════════════════╗
-   ║     ⚛️  REACT        ║
+   ║         REACT         ║
    ╠═══════════════════════╣
-   ║  const [state] =     ║
-   ║    useState(null);   ║
-   ║  return <App />;     ║
+   ║  const [state] =      ║
+   ║    useState(null);    ║
+   ║  return <App />;      ║
    ╚═══════════════════════╝
 tags:
   - React
@@ -29,7 +29,7 @@ The web has a problem: we ship too much JavaScript. Every library, every compone
 
 Consider a component that renders a blog post. It fetches data, parses markdown, formats dates, and renders HTML. With traditional React, all that code ships to the client. With Server Components, it stays on the server.
 
-![architecture]
+![React Server Components architecture](https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=600&fit=crop)
 
 ## The Mental Model
 
@@ -55,7 +55,7 @@ The framework handles code splitting at the component level. Client Components a
 
 The power of Server Components lies in composition. You can pass Server Components as children to Client Components:
 
-![composition]
+![React component composition](https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop)
 
 This pattern lets you mix server-rendered content with client-side interactivity seamlessly.
 

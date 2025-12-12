@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header";
 import FeaturedPost from "../components/FeaturedPost";
 import PostCard from "../components/PostCard";
 
@@ -45,7 +44,6 @@ const recentPosts = recentPostsData.map(post => ({
 ---
 
 <BaseLayout title="Blog">
-	<Header />
 	<main class="container mx-auto px-6 py-12 2xl:w-[1400px]">
 	{/* Hero Section */}
 	<section class="mb-16 fade-in">
@@ -66,8 +64,8 @@ const recentPosts = recentPostsData.map(post => ({
 	{/* Featured Post Section */}
 	<section class="mb-16">
 		<div class="flex items-center gap-3 mb-6">
-		<span class="font-mono text-sm text-primary">~/featured</span>
-		<div class="flex-1 h-px bg-border" />
+		<span class="font-mono text-sm text-forest">~/featured</span>
+		<div class="flex-1 h-px bg-forest" />
 		</div>
 		{featuredPost && <FeaturedPost {...featuredPost} />}
 	</section>
@@ -75,8 +73,8 @@ const recentPosts = recentPostsData.map(post => ({
 	{/* Recent Posts Grid */}
 	<section>
 		<div class="flex items-center gap-3 mb-8">
-		<span class="font-mono text-sm text-primary">~/recent</span>
-		<div class="flex-1 h-px bg-border" />
+		<span class="font-mono text-sm text-forest">~/recent</span>
+		<div class="flex-1 h-px bg-forest" />
 		<a
 			href="#"
 			class="font-mono text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -108,7 +106,7 @@ const recentPosts = recentPostsData.map(post => ({
 			placeholder="you@email.com"
 			class="flex-1 px-4 py-3 bg-secondary border border-border rounded-lg font-mono text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
 			/>
-			<button class="px-6 py-3 bg-primary text-primary-foreground font-mono text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">
+			<button class="px-6 py-3 bg-forest text-white font-mono text-sm font-medium rounded-lg hover:bg-forest/90 transition-colors">
 			Subscribe
 			</button>
 		</div>

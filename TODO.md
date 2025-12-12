@@ -1,12 +1,6 @@
 # when migrating
 
-Blog page design:
-- make the top wider, simialar to webdesignerdepot
-- consider keeping the header
-- consider doing text on white background, same as webdesignerdepot
-- add images to post, see how they look
-- move the sahre buttons to the top
-- check mobile
+- handle the ascii art images
 
 Tidy up:
 - Toaster is no longer used, instead we arew using shadcn sonner component. usage in shadcn docs is:
@@ -24,6 +18,7 @@ Whos behind this:
 
 Small tasks:
 - add a notice about content not being AI generated
+- extract the sharing buttons in each blog post to their own component
 - link copied is not a modal or toast but an annoying big msg. fix it.
 - check all share buttons. i don't think any of them work.
 - revise the header, name and short sentences under the header

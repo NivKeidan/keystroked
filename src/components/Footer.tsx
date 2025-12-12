@@ -1,5 +1,3 @@
-import { Github, Twitter, Rss } from "lucide-react";
-
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-card/50 mt-20">
@@ -14,37 +12,6 @@ const Footer = () => {
               $ echo "Building in public"
             </p>
           </div>
-
-          {/* Social Links */}
-          <div className="flex items-center gap-4">
-            <a
-              href="#"
-              className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="#"
-              className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
-              aria-label="Twitter"
-            >
-              <Twitter className="w-5 h-5" />
-            </a>
-            <a
-              href="#"
-              className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
-              aria-label="RSS Feed"
-            >
-              <Rss className="w-5 h-5" />
-            </a>
-          </div>
-
-          {/* Copyright */}
-          <p className="text-xs text-muted-foreground font-mono">
-            © {new Date().getFullYear()} • Made with{" "}
-            <span className="text-primary">♥</span> and caffeine
-          </p>
         </div>
       </div>
     </footer>

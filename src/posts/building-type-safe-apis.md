@@ -6,7 +6,7 @@ pubDate: Dec 8, 2024
 readTime: 8 min read
 asciiArt: |
    ╭──────────────────────╮
-   │   ⟨ REST API ⟩      │
+   │   ⟨ REST API ⟩       │
    │  ═══════════════════ │
    │  GET  /users  → 200  │
    │  POST /data   → 201  │
@@ -29,7 +29,7 @@ Traditional API development often involves a disconnect between what your server
 
 Consider a typical scenario: you define a type in TypeScript, but at runtime, there's nothing stopping invalid data from sneaking through. TypeScript's types are erased at compile time, leaving your API vulnerable to malformed input.
 
-![diagram]
+![Type-safe API architecture diagram](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop)
 
 ## Why Zod?
 
@@ -52,7 +52,7 @@ The schema above defines what a valid blog post looks like. Zod will validate in
 
 The real power comes when you integrate Zod with your API layer. Whether you're using Express, Fastify, or a serverless framework, the pattern remains the same.
 
-![code-example]
+![TypeScript code example](https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=600&fit=crop)
 
 ## Advanced Patterns
 

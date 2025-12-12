@@ -12,17 +12,17 @@ type Props = CollectionEntry<'blog'>['data'];
 const { title, slug, excerpt, pubDate, readTime, asciiArt, tags } = Astro.props;
 
 // Format date for header
-const headerDate = pubDate.toLocaleDateString('en-US', { 
-  month: 'long', 
-  day: 'numeric', 
-  year: 'numeric' 
+const headerDate = pubDate.toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
 });
 
 // Format date for other uses
-const formattedDate = pubDate.toLocaleDateString('en-US', { 
-  month: 'short', 
-  day: 'numeric', 
-  year: 'numeric' 
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
 });
 
 // Get related posts (exclude current post, get 2 others)
@@ -35,9 +35,9 @@ const relatedPosts = allPosts
     title: post.data.title,
     excerpt: post.data.excerpt,
     date: post.data.pubDate.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric', 
-      year: 'numeric' 
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
     }),
     readTime: post.data.readTime,
     asciiArt: post.data.asciiArt,
@@ -59,18 +59,22 @@ const shareText = encodeURIComponent(`${title} - ${excerpt}`);
         <span class="font-mono text-sm">Back to posts</span>
       </a>
 
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="flex justify-center md:justify-start">
-          <div class="p-8 bg-card rounded-xl border border-border">
-            <AsciiArt art={asciiArt} />
+      <div class="grid md:grid-cols-2 gap-12 items-stretch">
+        <div class="w-full h-full">
+          <div class="w-full h-full p-8 bg-card rounded-xl border border-border flex items-center justify-center min-h-[400px]">
+            <AsciiArt art={asciiArt} size="lg" />
           </div>
         </div>
 
         <div class="space-y-6">
           {tags.length > 0 && (
-            <Badge className="font-mono text-xs bg-accent text-background px-3 py-1 rounded-full">
-              {tags[0]}
-            </Badge>
+            <div class="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <Badge className="font-mono text-xs bg-accent text-background px-3 py-1 rounded-full border border-transparent transition-colors">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
           )}
           
           <h1 class="font-mono text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
@@ -90,7 +94,7 @@ const shareText = encodeURIComponent(`${title} - ${excerpt}`);
               href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:opacity-80 transition-opacity"
+              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
               aria-label="Share on Facebook"
             >
               <Facebook className="w-5 h-5" />
@@ -99,7 +103,7 @@ const shareText = encodeURIComponent(`${title} - ${excerpt}`);
               href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${encodeURIComponent(shareUrl)}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:opacity-80 transition-opacity"
+              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
               aria-label="Share on X (Twitter)"
             >
               <Twitter className="w-5 h-5" />
@@ -108,14 +112,14 @@ const shareText = encodeURIComponent(`${title} - ${excerpt}`);
               href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:opacity-80 transition-opacity"
+              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
               aria-label="Share on LinkedIn"
             >
               <Linkedin className="w-5 h-5" />
             </a>
             <button
               data-copy-url={shareUrl}
-              class="copy-link-btn w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:opacity-80 transition-opacity cursor-pointer"
+              class="copy-link-btn w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors cursor-pointer"
               aria-label="Copy link"
             >
               <Link2 className="w-5 h-5" />
@@ -125,11 +129,11 @@ const shareText = encodeURIComponent(`${title} - ${excerpt}`);
       </div>
     </div>
   </header>
-  <article class="container px-4 lg:pl-12 lg:pr-4 pb-16 2xl:w-[1400px]">
-    <div class="prose max-w-3xl mx-4 md:ml-85 md:mr-auto text-lg prose-p:my-6 leading-[1.8] prose-h2:mt-16 prose-h2:mb-6 prose-h3:mt-12 prose-h3:mb-4">
-      <slot />
-    </div>
-    </article>
+  <div class="blog-content">
+    <article class="container px-4 lg:pl-12 lg:pr-4 pb-16 2xl:w-[1400px] prose max-w-3xl mx-4 md:ml-85 md:mr-auto text-lg prose-p:my-6 leading-[1.8] prose-h2:mt-16 prose-h2:mb-6 prose-h3:mt-12 prose-h3:mb-4">
+        <slot />
+      </article>
+  </div>
 
   <section class="border-t border-border bg-muted/20">
     <div class="container mx-auto px-6 py-8 2xl:w-[1400px]">
