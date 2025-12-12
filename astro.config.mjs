@@ -7,8 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://nivkeidan.github.io',
-  base: '/keystroked',
+  site: 'https://keystroked.cheekyservice.com',
   integrations: [react()],
 
   vite: {
