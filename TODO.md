@@ -5,6 +5,7 @@
 - rework the ascii images per article
 - publish online on my domain
 - implement the newsletter feature
+- incorporate google analytics
 
 before publishing:
 

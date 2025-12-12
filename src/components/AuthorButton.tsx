@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User, Mail, Github, ExternalLink } from "lucide-react";
+import { User, Mail, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -130,7 +130,7 @@ const AuthorButton = () => {
             </Button>
             <Button variant="outline" size="icon" className="shrink-0 border-border hover:border-primary hover:bg-primary" asChild>
               <a href="https://linkedin.com/in/nivkeidan" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                <ExternalLink className="w-4 h-4" />
+                <Linkedin className="w-4 h-4" />
               </a>
             </Button>
           </div>
