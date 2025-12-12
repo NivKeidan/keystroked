@@ -1,10 +1,8 @@
-# Astro Starter Kit: Minimal
+# Blog Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+This is a blog website built with Astro.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The site is hosted at: https://keystroked.cheekyservice.com
 
 ## 🚀 Project Structure
 
