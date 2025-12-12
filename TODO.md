@@ -1,13 +1,5 @@
 # when migrating
 
-- handle the ascii art images
-
-Tidy up:
-- Toaster is no longer used, instead we arew using shadcn sonner component. usage in shadcn docs is:
-`import { toast } from "sonner"`
-- fix icons deprecated
-- go over all componenets, make sure they are rendered properly
-
 Whos behind this:
 - design and finalize the whos behind this button
 - github link
@@ -18,6 +10,7 @@ Whos behind this:
 
 Small tasks:
 - add a notice about content not being AI generated
+- remove the viewall link in the ~/rwecent separator
 - extract the sharing buttons in each blog post to their own component
 - link copied is not a modal or toast but an annoying big msg. fix it.
 - check all share buttons. i don't think any of them work.

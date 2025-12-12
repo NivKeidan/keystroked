@@ -4,23 +4,16 @@ import BaseLayout from './BaseLayout.astro';
 import PostCard from '../components/PostCard';
 import AsciiArt from '../components/AsciiArt';
 import { Badge } from '../components/ui/badge';
-import { ArrowLeft, Calendar, Clock, Facebook, Twitter, Linkedin, Link2 } from 'lucide-react';
+import { ArrowLeft, Facebook, Twitter, Linkedin, Link2 } from 'lucide-react';
 import { type CollectionEntry } from 'astro:content';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, slug, excerpt, pubDate, readTime, asciiArt, tags } = Astro.props;
+const { title, slug, excerpt, pubDate, asciiArt, tags } = Astro.props;
 
 // Format date for header
 const headerDate = pubDate.toLocaleDateString('en-US', {
   month: 'long',
-  day: 'numeric',
-  year: 'numeric',
-});
-
-// Format date for other uses
-const formattedDate = pubDate.toLocaleDateString('en-US', {
-  month: 'short',
   day: 'numeric',
   year: 'numeric',
 });
@@ -48,7 +41,6 @@ const relatedPosts = allPosts
 const currentUrl = Astro.url;
 const shareUrl = currentUrl.href;
 const shareTitle = encodeURIComponent(title);
-const shareText = encodeURIComponent(`${title} - ${excerpt}`);
 ---
 
 <BaseLayout title={`dev_log | ${title}`}>
@@ -155,6 +147,7 @@ const shareText = encodeURIComponent(`${title} - ${excerpt}`);
     </div>
   </section>
   <script>
+    import { toast } from "sonner";
     document.addEventListener('DOMContentLoaded', () => {
       const copyBtn = document.querySelector('.copy-link-btn');
       if (copyBtn) {
@@ -163,7 +156,7 @@ const shareText = encodeURIComponent(`${title} - ${excerpt}`);
           if (url) {
             try {
               await navigator.clipboard.writeText(url);
-              alert('Link copied!');
+              toast('Link copied!');
             } catch (err) {
               console.error('Failed to copy:', err);
             }

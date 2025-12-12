@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Footer from '../components/Footer';
 import AuthorButton from '../components/AuthorButton';
 import Header from '../components/Header';
-import { SimpleToaster } from '../components/SimpleToaster';
+import { Toaster } from "@/components/ui/sonner"
 
 interface Props {
   title?: string;
@@ -28,7 +28,7 @@ const { title = 'Blog' } = Astro.props;
       <slot />
       
       <Footer />
-      <SimpleToaster client:load />
+      <Toaster client:load/>
     </div>
   </body>
 </html>
