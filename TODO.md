@@ -3,9 +3,9 @@
 - ask michal about the "keystroked, not generated"
 - write the first blog post
 - rework the ascii images per article
-- publish online on my domain
 - implement the newsletter feature
 - incorporate google analytics
+- add cookie consent <https://daniel.es/blog/the-ultimate-astro-google-analytics-guide/>
 
 before publishing:
 
