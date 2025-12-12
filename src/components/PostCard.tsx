@@ -85,7 +85,7 @@ const PostCard = ({
 
   if (slug) {
     return (
-      <a href={`/posts/${slug}`} className={className} style={style}>
+      <a href={`/keystroked/posts/${slug}`} className={className} style={style}>
         {content}
       </a>
     );

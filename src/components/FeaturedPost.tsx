@@ -81,7 +81,7 @@ const FeaturedPost = ({
   if (slug) {
     return (
       <a
-        href={`/posts/${slug}`}
+        href={`/keystroked/posts/${slug}`}
         className="group terminal-box p-6 md:p-8 fade-in cursor-pointer block"
       >
         {content}
