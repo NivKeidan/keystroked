@@ -6,10 +6,10 @@ const Footer = () => {
           {/* Branding */}
           <div className="text-center md:text-left">
             <span className="font-mono text-lg font-semibold text-foreground">
-              dev<span className="text-primary">_</span>log
+              keystroked
             </span>
             <p className="text-sm text-muted-foreground mt-1 font-mono">
-              $ echo "Building in public"
+              All content is written by humans, not AI.
             </p>
           </div>
         </div>

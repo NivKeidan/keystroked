@@ -11,7 +11,7 @@ const Header = () => {
               <Terminal className="w-5 h-5 text-primary" />
             </div>
             <span className="font-mono text-xl font-semibold text-foreground">
-              dev<span className="text-primary">_</span>log
+              keystroked
               <span className="cursor-blink text-primary">▋</span>
             </span>
           </a>

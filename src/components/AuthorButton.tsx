@@ -28,7 +28,7 @@ const services = [
   },
   {
     title: "Bash",
-    description: "I simply love bash",
+    description: "I just like bash",
   },
 ];
 
