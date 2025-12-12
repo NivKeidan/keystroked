@@ -5,6 +5,9 @@ Whos behind this:
 - github link
 - linkedin link
 - contact possibility
+- check mobile with actual phone though
+
+- option/idea: have same theme or idea for ascii art, but one small and one big. they can be different, that can be actually nice. and this will be more like art and I can write an article on how art is still slow even with AI.
 
 - rework the ascii images per article. find the common prompt and instructions to do this.
 

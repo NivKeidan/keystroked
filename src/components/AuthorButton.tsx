@@ -1,4 +1,4 @@
-import { User, Mail, Github, ExternalLink } from "lucide-react";
+import { Mail, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,12 +14,10 @@ const AuthorButton = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="fixed bottom-6 right-6 z-50 font-mono gap-2 shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
+          className="fixed bottom-6 right-6 z-50 font-mono shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105 cursor-pointer rounded-full w-24 h-24 p-2 flex items-center justify-center text-center whitespace-normal break-words"
           size="lg"
         >
-          <User className="w-4 h-4" />
-          <span className="hidden sm:inline">Who's behind this?</span>
-          <span className="sm:hidden">About</span>
+          Who's behind this?
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md border-border bg-background">
@@ -32,51 +30,50 @@ const AuthorButton = () => {
           </DialogDescription>
         </DialogHeader>
         
-        <div className="space-y-6 py-4">
+        <div className="space-y-4 py-4">
           {/* Terminal-style intro */}
           <div className="terminal-box p-4">
             <pre className="font-mono text-xs text-primary leading-relaxed">
-{`  ╭──────────────────────────╮
-  │   FREELANCE DEVELOPER   │
-  │   & SOFTWARE ARCHITECT  │
+{`╭──────────────────────────╮
+  │   SENIOR SOFTWARE DEV     │
+  │   8+ YEARS EXPERIENCE     │
   ╰──────────────────────────╯`}
             </pre>
           </div>
 
-          <div className="space-y-4">
-            <p className="text-muted-foreground leading-relaxed">
-              Hey there! I'm a freelance developer passionate about building 
-              clean, performant, and user-friendly software. I specialize in:
+          <div className="space-y-3">
+            <p className="text-muted-foreground leading-relaxed text-sm">
+              Hey there! I'm Niv, a Senior Software Developer with 8+ years building scalable 
+              systems, distributed infrastructure, and AI-powered solutions.
             </p>
 
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2 text-foreground">
-                <span className="text-primary font-mono">→</span>
-                Full-stack web development
-              </li>
-              <li className="flex items-center gap-2 text-foreground">
-                <span className="text-primary font-mono">→</span>
-                API design & architecture
-              </li>
-              <li className="flex items-center gap-2 text-foreground">
-                <span className="text-primary font-mono">→</span>
-                React & TypeScript applications
-              </li>
-              <li className="flex items-center gap-2 text-foreground">
-                <span className="text-primary font-mono">→</span>
-                Technical consulting
-              </li>
-            </ul>
+            <div className="space-y-2">
+              <p className="text-xs font-semibold text-foreground">Available for:</p>
+              <ul className="space-y-1.5 text-xs">
+                <li className="flex items-start gap-2 text-foreground">
+                  <span className="text-primary font-mono">→</span>
+                  <span>End-to-end projects, team augmentation (mentoring, deep tech guidance), or specialized integrations</span>
+                </li>
+              </ul>
+            </div>
 
-            <p className="text-muted-foreground leading-relaxed text-sm">
-              Looking for someone to bring your ideas to life? Let's build something great together.
+            <div className="space-y-2">
+              <p className="text-xs font-semibold text-foreground">Tech stack:</p>
+              <p className="text-xs text-muted-foreground">
+                Golang, Python, TypeScript • Backend architecture • AI/ML workflows • 
+                Kubernetes, AWS, CI/CD • Full-stack (React, Angular, Svelte)
+              </p>
+            </div>
+
+            <p className="text-muted-foreground leading-relaxed text-xs">
+              Freelance & contract work available — locally in Israel and internationally.
             </p>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <Button className="flex-1 font-mono gap-2" asChild>
-              <a href="mailto:hello@example.com">
+              <a href="mailto:nivkeidan@gmail.com">
                 <Mail className="w-4 h-4" />
                 Get in touch
               </a>
@@ -87,16 +84,12 @@ const AuthorButton = () => {
                 GitHub
               </a>
             </Button>
-          </div>
-
-          <div className="pt-2 border-t border-border">
-            <a 
-              href="#" 
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
-            >
-              <ExternalLink className="w-3 h-3" />
-              View full portfolio
-            </a>
+            <Button variant="outline" className="flex-1 font-mono gap-2" asChild>
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="w-4 h-4" />
+                LinkedIn
+              </a>
+            </Button>
           </div>
         </div>
       </DialogContent>
