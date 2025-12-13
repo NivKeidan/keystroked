@@ -19,23 +19,26 @@ const { title = 'Blog' } = Astro.props;
       import.meta.env.PROD && (
         <>
           <!-- Google tag (gtag.js) -->
-          <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-VQT1JCQZE2"></script>
-          <script is:inline>
+          <script is:inline src="https://www.googletagmanager.com/gtag/js?id=G-VQT1JCQZE2"></script>
+          <script>
+            console.log('yo yo start');
+            console.log('gtag', window.gtag);
+            console.log('dataLayer', window.dataLayer);
             window.dataLayer = window.dataLayer || [];
             window.gtag = function gtag(...args) {
               window.dataLayer.push(args);
             }
-            gtag('js', new Date());
+            window.gtag('js', new Date());
 
             // This should ALWAYS be set before the gtag("config", "G-XXXXXXXXXX"); line
-            gtag("consent", "default", {
+            window.gtag("consent", "default", {
                 ad_storage: "denied",
                 ad_user_data: "denied",
                 ad_personalization: "denied",
                 analytics_storage: "denied",
             });
 
-            gtag('config', 'G-VQT1JCQZE2', { 'debug_mode':true });
+            window.gtag('config', 'G-VQT1JCQZE2', { 'debug_mode':true });
           </script>
         </>
       )

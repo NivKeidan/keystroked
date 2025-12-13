@@ -27,7 +27,8 @@ export const config: CookieConsentConfig = {
           label: '[Google Analytics 4](https://marketingplatform.google.com/about/analytics/terms/us/)',
           onAccept: () => {
             console.log('ga4 accepted');
-            window.gtag?.("consent", "update", {
+            console.log(window.gtag);
+            window.gtag("consent", "update", {
               ad_storage: "granted",
               ad_user_data: "granted",
               ad_personalization: "granted",
