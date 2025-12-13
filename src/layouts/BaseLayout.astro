@@ -21,9 +21,6 @@ const { title = 'Blog' } = Astro.props;
           <!-- Google tag (gtag.js) -->
           <script is:inline src="https://www.googletagmanager.com/gtag/js?id=G-VQT1JCQZE2"></script>
           <script>
-            console.log('yo yo start');
-            console.log('gtag', window.gtag);
-            console.log('dataLayer', window.dataLayer);
             window.dataLayer = window.dataLayer || [];
             window.gtag = function gtag(...args: any[]) {
               window.dataLayer.push(arguments);
@@ -38,7 +35,7 @@ const { title = 'Blog' } = Astro.props;
                 analytics_storage: "denied",
             });
 
-            window.gtag('config', 'G-VQT1JCQZE2', { 'debug_mode':true });
+            window.gtag('config', 'G-VQT1JCQZE2');
           </script>
         </>
       )
