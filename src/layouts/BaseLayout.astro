@@ -25,8 +25,8 @@ const { title = 'Blog' } = Astro.props;
             console.log('gtag', window.gtag);
             console.log('dataLayer', window.dataLayer);
             window.dataLayer = window.dataLayer || [];
-            window.gtag = function gtag(...args) {
-              window.dataLayer.push(args);
+            window.gtag = function gtag(...args: any[]) {
+              window.dataLayer.push(arguments);
             }
             window.gtag('js', new Date());
 
