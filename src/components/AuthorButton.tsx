@@ -108,8 +108,12 @@ const AuthorButton = () => {
           {/* Intro section */}
           <div className="flex items-center gap-4">
             {/* Profile picture */}
-            <div className="w-20 h-20 rounded-full bg-forest/30 border-2 border-forest overflow-hidden shrink-0 flex items-center justify-center">
-              <User className="w-10 h-10 text-forest" />
+            <div className="w-20 h-20 rounded-full border-2 border-forest overflow-hidden shrink-0">
+              <img 
+                src="/profile_pic.jpeg" 
+                alt="Niv Keidan" 
+                className="w-full h-full object-cover"
+              />
             </div>
             
             {/* Friendly intro */}
