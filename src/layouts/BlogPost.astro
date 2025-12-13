@@ -86,8 +86,9 @@ const shareTitle = encodeURIComponent(title);
               href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
+              class="share-facebook w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
               aria-label="Share on Facebook"
+              data-article-title={title}
             >
               <Facebook className="w-5 h-5" />
             </a>
@@ -95,8 +96,9 @@ const shareTitle = encodeURIComponent(title);
               href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${encodeURIComponent(shareUrl)}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
+              class="share-twitter w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
               aria-label="Share on X (Twitter)"
+              data-article-title={title}
             >
               <Twitter className="w-5 h-5" />
             </a>
@@ -104,13 +106,15 @@ const shareTitle = encodeURIComponent(title);
               href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
+              class="share-linkedin w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors"
               aria-label="Share on LinkedIn"
+              data-article-title={title}
             >
               <Linkedin className="w-5 h-5" />
             </a>
             <button
               data-copy-url={shareUrl}
+              data-article-title={title}
               class="copy-link-btn w-10 h-10 rounded-full border border-accent bg-background flex items-center justify-center text-foreground hover:bg-terminal-amber hover:text-black transition-colors cursor-pointer"
               aria-label="Copy link"
             >
@@ -149,6 +153,44 @@ const shareTitle = encodeURIComponent(title);
   <script>
     import { toast } from "sonner";
     document.addEventListener('DOMContentLoaded', () => {
+      const articleTitle = document.querySelector('[data-article-title]')?.getAttribute('data-article-title') || '';
+
+      const facebookBtn = document.querySelector('.share-facebook');
+      if (facebookBtn) {
+        facebookBtn.addEventListener('click', () => {
+          if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag("event", "article_share_click", {
+              platform: "facebook",
+              article: articleTitle,
+            });
+          }
+        });
+      }
+
+      const twitterBtn = document.querySelector('.share-twitter');
+      if (twitterBtn) {
+        twitterBtn.addEventListener('click', () => {
+          if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag("event", "article_share_click", {
+              platform: "twitter",
+              article: articleTitle,
+            });
+          }
+        });
+      }
+
+      const linkedinBtn = document.querySelector('.share-linkedin');
+      if (linkedinBtn) {
+        linkedinBtn.addEventListener('click', () => {
+          if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag("event", "article_share_click", {
+              platform: "linkedin",
+              article: articleTitle,
+            });
+          }
+        });
+      }
+
       const copyBtn = document.querySelector('.copy-link-btn');
       if (copyBtn) {
         copyBtn.addEventListener('click', async () => {
@@ -157,6 +199,12 @@ const shareTitle = encodeURIComponent(title);
             try {
               await navigator.clipboard.writeText(url);
               toast('Link copied!');
+              if (typeof window !== 'undefined' && window.gtag) {
+                window.gtag("event", "article_share_click", {
+                  platform: "link",
+                  article: articleTitle,
+                });
+              }
             } catch (err) {
               console.error('Failed to copy:', err);
             }

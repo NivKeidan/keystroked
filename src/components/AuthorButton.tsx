@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { trackEvent } from "@/lib/analytics";
 
 const services = [
   {
@@ -43,7 +44,12 @@ const TagsView = ({ services }: { services: { title: string; description: string
         {services.map((service, i) => (
           <button
             key={service.title}
-            onClick={() => setSelectedIndex(i)}
+            onClick={() => {
+              setSelectedIndex(i);
+              trackEvent("about_me_tag_click", {
+                tag: service.title.toLowerCase(),
+              });
+            }}
             className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all duration-200 cursor-pointer ${
               selectedIndex === i
                 ? "bg-primary text-primary-foreground border border-primary"
@@ -77,6 +83,11 @@ const AuthorButton = () => {
         <Button
           className="fixed bottom-6 right-6 z-50 font-mono gap-2 shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
           size="lg"
+          onClick={() => {
+            trackEvent("whos_behind_this_click", {
+              page: typeof window !== 'undefined' ? window.location.pathname : 'unknown',
+            });
+          }}
         >
           <User className="w-4 h-4" />
           <span className="hidden sm:inline">Who's behind this?</span>
@@ -122,18 +133,39 @@ const AuthorButton = () => {
           {/* Friendly CTA */}
           <div className="flex items-center gap-3 pt-1">
             <Button variant="outline" className="flex-1 gap-2 border-primary text-primary hover:bg-primary hover:text-background hover:border-primary" asChild>
-              <a href="mailto:nivkeidan@gmail.com">
+              <a 
+                href="mailto:nivkeidan@gmail.com"
+                onClick={() => {
+                  trackEvent("about_me_say_hello_click");
+                }}
+              >
                 <Mail className="w-4 h-4" />
                 Say hello
               </a>
             </Button>
             <Button variant="outline" size="icon" className="shrink-0 border-border hover:border-primary hover:bg-primary" asChild>
-              <a href="https://github.com/nivkeidan" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <a 
+                href="https://github.com/nivkeidan" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="GitHub"
+                onClick={() => {
+                  trackEvent("about_me_github_click");
+                }}
+              >
                 <Github className="w-4 h-4" />
               </a>
             </Button>
             <Button variant="outline" size="icon" className="shrink-0 border-border hover:border-primary hover:bg-primary" asChild>
-              <a href="https://linkedin.com/in/nivkeidan" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+              <a 
+                href="https://linkedin.com/in/nivkeidan" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                title="LinkedIn"
+                onClick={() => {
+                  trackEvent("about_me_linkedin_click");
+                }}
+              >
                 <Linkedin className="w-4 h-4" />
               </a>
             </Button>
