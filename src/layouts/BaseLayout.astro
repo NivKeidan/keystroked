@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import AuthorButton from '../components/AuthorButton';
 import Header from '../components/Header';
 import { Toaster } from "@/components/ui/sonner"
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title?: string;
@@ -21,7 +22,9 @@ const { title = 'Blog' } = Astro.props;
           <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-VQT1JCQZE2"></script>
           <script is:inline>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            window.gtag = function gtag(...args) {
+              window.dataLayer.push(args);
+            }
             gtag('js', new Date());
 
             // This should ALWAYS be set before the gtag("config", "G-XXXXXXXXXX"); line
@@ -39,6 +42,7 @@ const { title = 'Blog' } = Astro.props;
     }
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css">
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -49,8 +53,9 @@ const { title = 'Blog' } = Astro.props;
       <Header />
       
       <slot />
-      
+
       <Footer />
+      <CookieConsent />
       <Toaster client:load/>
     </div>
   </body>

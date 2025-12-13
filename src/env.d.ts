@@ -1,10 +1,6 @@
 /// <reference types="astro/client" />
 
 interface Window {
-  gtag?: (
-    command: string,
-    targetId: string | Date,
-    config?: Record<string, any>
-  ) => void;
-  dataLayer?: any[];
+  dataLayer: Record<string, any>[];
+  gtag?: (...args: any[]) => void;
 }
