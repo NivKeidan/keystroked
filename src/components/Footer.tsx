@@ -9,7 +9,7 @@ const Footer = () => {
               keystroked
             </span>
             <p className="text-sm text-muted-foreground mt-1 font-mono">
-              All content is written by humans, not AI.
+              All content is written by humans.
             </p>
           </div>
         </div>
