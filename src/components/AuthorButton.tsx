@@ -99,9 +99,6 @@ const AuthorButton = () => {
           <DialogTitle className="text-2xl font-bold text-foreground">
             Hey, I'm Niv 👋
           </DialogTitle>
-          <DialogDescription>
-            Learn more about the author behind this blog
-          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-5 py-2">
