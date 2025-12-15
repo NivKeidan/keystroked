@@ -1,7 +1,8 @@
 ---
 slug: optimization-vs-vertical-scaling
-title: 'Optimization vs. Vertical Scaling: A Curious Double Standard'
-excerpt: Exploring the gap between how these decisions feel and how they actually behave, and why similar trade-offs trigger very different reactions from engineers.
+title: Why Code Optimization Is the Vertical Scaling We Pretend Is Fine
+underlying: Great engineering judgment is about resisting locally satisfying improvements (vertical scaling, micro-optimizations, dogmatic rules) in favor of systemic, context-aware decisions.
+excerpt: Code optimization is often treated as thoughtful craftsmanship, while vertical scaling is dismissed as a shortcut. That difference has less to do with outcomes and more to do with how we value effort. This post is about learning to recognize that bias, and knowing when improvement is just effort, not progress.
 pubDate: Dec 13, 2025
 readTime: 666 min read
 asciiArt: |
@@ -13,36 +14,44 @@ asciiArt: |
    │  PUT  /item   → 200  │
    ╰──────────────────────╯
 tags:
-  - Design
-  - Human
+  - Architecture
+  - Philosophy
+  - Humans
 ---
 
-You’ve just watched the same demo go bad for the second time. The loader did not stop spinning for way too long after a request was made to the backend. You, with everyone else on the call, can sense the awkward silence while you impatiently wait for a new container to spin up. Your product guy fills the gap with time-stretching words, and luckily enough, the potential customer still shows interest at the end of the call. You dodged this one. After the call, you all look at the logs together: CPU spikes, throttling, then death. You know what to do, it is clear that setting up horizontal scaling is the right thing to do here. You start to explain, and the baffled product disrupts you and asks “can’t we just increase the CPU?”.
+You’ve just watched the same demo go bad for the second time. The loader did not stop spinning for way too long after a request was made to the backend. You, with everyone else on the call, can sense the awkward silence while you impatiently wait for a new container to spin up. Your product guy fills the gap with time-stretching words, and luckily enough, the potential customer still shows interest at the end of the call. You dodged this one. After the call, you all look at the logs together: CPU spikes, throttling, then death. You know what needs to be done, this has been sitting in your mind since the previous demo that failed. You being explaining your proposed solution, and the baffled product disrupts you and asks “can’t we just increase the CPU?”.
+This gentle moment isn’t really about CPU or containers. It’s about choosing the kind of problems we postpone — and the ones we pretend we’ve solved.
 
-## Nobody likes a vertical scaler
+## Capacity Without Change
 
-We all know the drill. Increasing CPU or memory only concentrates more responsibility into a single unit, and with that increases the blast radius of every failure. You find yourself doubling resources time and time again - only to see the cost quadruples. Most importantly, vertical scaling doesn’t change the behavior of the system; it only pushes limits further away. The same bottlenecks remain, it is just a bit harder to see them, and growth continues on the same trajectory until the next spike exposes them again.
+We all know the drill. Increasing CPU or memory only concentrates more responsibility into a single unit, and with that increases the blast radius of every failure. It doesn’t make the system more resilient or better structured; it simply allows it to fail later, and often more spectacularly. Vertical scaling gives the illusion of progress while preserving the same failure mode.
 
-The same mechanics quietly apply to code optimization. Improving the performance of a single function increases its importance to the system while often reducing its maintainability. The gain is measurable, but local. As usage grows and new deals are signed, the system eventually hits the same CPU limits again—this time with a more complex and fragile code path at its center.
+This pattern — improving capacity without changing behavior — shows up everywhere in engineering. What vertical scaling does to infrastructure, optimization does to code. By making a specific path faster or more efficient, we often increase its centrality without questioning whether it should be central at all. The system can handle more load, respond a bit faster, and survive longer — but the underlying structure remains unchanged. Just like vertical scaling, code optimization frequently delays the moment of failure rather than altering its shape, pushing hard questions about architecture, ownership, and flow further down the road.
 
 ## Why do we love code optimization so much?
 
-The real reason has very little to do with technical necessity. Yes, efficient code matters—but the attraction to optimization is far more human. In a profession where impact is often abstract and long-term, optimization offers something rare: immediate and visible craftsmanship, appreciated by others, backed by numbers, that you can confidently point to and say, *this is mine and this is good.* Who wouldn’t want to be the one in charge of enabling 10 times more requests in a single server? Who wouldn’t want to invent the next Dijkstra?
+The real reason we love code optimization has very little to do with technical necessity. Yes, efficient code matters—but the attraction runs deeper than performance metrics. Optimization is one of the rare moments in software development where the work itself is intrinsically satisfying. It demands that you dismantle a problem, understand it at a fundamental level, and reason about constraints, trade-offs, and edge cases. There are no shortcuts. You can’t copy-paste your way through it. You have to invent something—sometimes small, sometimes elegant, sometimes surprisingly clever—and when it works, the result feels earned. It’s craftsmanship in the purest sense: focus, creativity, and deep understanding converging into a tangible improvement.
 
-Premature optimization becomes an Achilles’ heel in many early-stage products and startups. The drive to write efficient code often misaligns with immediate business needs, where speed of iteration and clarity matter more than raw performance. Time spent optimizing paths that aren’t yet under real pressure is time not spent improving reliability, adding observability, or shipping features that validate demand. Assumptions that justified the optimization—traffic shape, data size, access patterns—are rarely stable early on. The result is code that is both harder to understand and more resistant to change, amplifying the cost of future work while providing diminishing returns as the system grows and the product shapes.
+That satisfaction, however, carries a subtle risk. We are wired to value work that feels hard, time-consuming, and mentally demanding. The more effort we invest, the more meaningful the outcome appears—regardless of its actual impact. This effort bias makes optimized code feel *more valuable* than other alternatives. Time spent wrestling with complexity is easy to justify, easy to defend, and easy to take pride in. But effort is not the same as progress. A solution can be intellectually impressive and still misaligned with what the system—or the business—actually needs. When that happens, optimization stops being a response to reality and becomes a reward loop of its own.
 
 ## The really tough skill to master
 
-When I learned physics, I once heard a veteran researcher say that “great physicits simply know which forces are negligible”. This comes with a lot of experience, you start to develop the intuition as to what is more important than others - thus simplifying complex mathematical calculations. I believe this is the same for software development. With time, you begin to develop intuition on what and when to optimize. With experience and critical observation of one self, you learn to push aside your inner desire to write the most optimized code ever written, in favor of more immediate business requirements. On the other hand, you know where a bottleneck will be formed if something is done far from optimal.
+One of the hardest skills to develop as an engineer is knowing when *not* to improve something — even when you clearly could.
 
-And it is not enough to be able to have that intuition. You also need to be able to convey it properly to team mates and team leads. Getting that buy-in from your fellow team mates and managers is crucial to your personal success in a team, and even more crucial in passing on the knowledge and mindset to other team members. This is not an easy task with intuition. A lot of the times the person who has the intuition no longer remembers exactly what formed it and how to walk someone else step by step to the “correct” conclusion.
+I once heard a veteran physics researcher say that great physicists "know which forces are negligible” in order to simplify a complex problem. That knowledge doesn’t come from formulas alone; it comes from experience. From seeing, in different contexts and problems, which details matter and which ones only distract you from the problem you’re actually trying to solve.
+
+Software development is no different. With time, you develop an intuition for where optimization will truly pay off — and where it will distract the people trying to make it better. You learn to resist the urge to write the most optimized code you can, and instead focus on what the system and the business needs *right now*: be it product validation, code readability, or simply focusing on other aspects of they system.
+
+Alas, solely having this intuition isn’t sufficient as well. You also need to be able to communicate it. Convincing teammates and leads that *not* improving something is the right call is often harder than proposing an optimization. Intuition is difficult to transfer, especially when the person who has it no longer remembers all the small experiences that shaped it. Trying to explain why a specific decision for a specific use-case is the right one can lead to arguments and a stale discussion. On the other hand, passing on that judgment — and the view point behind it — is essential for building strong teams and healthy engineering culture. The execution of these ideas by your peers will occur, hopefully sooner than later.
+
 
 ## What more can’t we see
 
-If we agree that vertical scaling is often frowned upon while code optimization is treated far more kindly—despite leading to very similar outcomes in many cases—it’s worth asking what else we might be missing. What other practices do we follow simply because they’re widely accepted? Which guidelines do we repeat and enforce without fully understanding the context in which they were originally meant to apply? And if we don’t truly understand *why* a rule exists, how can we know when it’s appropriate to break it?
+If vertical scaling is easily dismissed while code optimization is perceived as valued — despite leading to similar outcomes — it’s worth asking what other familiar efforts we routinely mistake for progress.
 
-Take some familiar examples. Should code never repeat itself—or is duplication sometimes a reasonable trade-off for readability? Are comments always a net positive? Do we actually enjoy reading AI-generated code that explains itself line by line? These aren’t trick questions. They remind us that many of our instincts come from habit and shared culture, not from deliberate reasoning.
+Take some familiar examples. Should code never repeat itself, or is duplication sometimes a reasonable trade-off for readability and flexibility? Are comments always a net positive? Do you actually enjoy reading AI-generated code that explains itself line by line? Does higher test coverage always mean higher confidence, or can it hide brittle tests that merely lock in existing behavior?
+These aren’t trick questions. They highlight how often our instincts are shaped by habit and shared culture rather than deliberate reasoning.
 
-The point isn’t that these guidelines are wrong. Most of them exist for good reasons. The danger lies in applying them automatically, without revisiting the conditions that made them sensible in the first place. Seniority isn’t about knowing more rules—it’s about understanding which ones matter right now, which ones can be ignored, and which ones might quietly be holding you back.
+## Progress through Awareness
 
-Optimization isn’t bad. Vertical scaling isn’t bad. But mistaking familiar effort for real progress is—and learning to tell the difference is one of the hardest skills to develop.
+Optimization isn’t bad. Vertical scaling isn’t bad. But mistaking familiar effort for real progress is — and learning to tell the difference is one of the hardest skills to develop. Doing so requires more than technical knowledge; it demands the ability to observe our own instincts and question why a solution feels right. Good engineering judgment comes from recognizing our own biases, and accounting for it deliberately rather than letting it quietly steer our decisions.
