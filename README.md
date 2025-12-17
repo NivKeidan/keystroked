@@ -2,7 +2,7 @@
 
 This is a blog website built with Astro.
 
-The site is hosted at: https://keystroked.cheekyservice.com
+The site is hosted at: <https://keystroked.nivkeidan.dev>
 
 ## 🚀 Project Structure
 
