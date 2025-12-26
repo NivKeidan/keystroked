@@ -1,5 +1,4 @@
 import { ArrowRight, Clock, Calendar } from "lucide-react";
-import AsciiArt from "./AsciiArt";
 
 interface FeaturedPostProps {
   slug?: string;
@@ -7,7 +6,7 @@ interface FeaturedPostProps {
   excerpt: string;
   date: string;
   readTime: string;
-  asciiArt: string;
+  thumbnail: string;
   tags: string[];
 }
 
@@ -17,14 +16,14 @@ const FeaturedPost = ({
   excerpt,
   date,
   readTime,
-  asciiArt,
+  thumbnail,
   tags,
 }: FeaturedPostProps) => {
   const content = (
     <div className="flex flex-col lg:flex-row gap-8">
-      {/* ASCII Art Section */}
+      {/* Image Section */}
       <div className="lg:w-2/5">
-        <AsciiArt art={asciiArt} size="sm" />
+        <img src={`/${thumbnail}`} alt={title} className="w-full h-auto rounded-lg" />
       </div>
 
       {/* Content Section */}

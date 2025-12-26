@@ -8,9 +8,9 @@ const sortedPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-// First post is featured, rest are recent
+// First post is featured, all posts are recent
 const featuredPostData = sortedPosts[0];
-const recentPostsData = sortedPosts.slice(1);
+const recentPostsData = sortedPosts;
 
 // Format featured post
 const featuredPost = featuredPostData ? {
@@ -23,7 +23,7 @@ const featuredPost = featuredPostData ? {
     year: 'numeric' 
   }),
   readTime: featuredPostData.data.readTime,
-  asciiArt: featuredPostData.data.asciiArt,
+  thumbnail: featuredPostData.data.thumbnail,
   tags: featuredPostData.data.tags,
 } : null;
 
@@ -38,7 +38,7 @@ const recentPosts = recentPostsData.map(post => ({
     year: 'numeric' 
   }),
   readTime: post.data.readTime,
-  asciiArt: post.data.asciiArt,
+  thumbnail: post.data.thumbnail,
   tags: post.data.tags,
 }));
 ---

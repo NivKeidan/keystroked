@@ -1,5 +1,4 @@
 import { ArrowRight, Clock, Calendar } from "lucide-react";
-import AsciiArt from "./AsciiArt";
 
 export interface PostCardProps {
   slug?: string;
@@ -7,7 +6,7 @@ export interface PostCardProps {
   excerpt: string;
   date: string;
   readTime: string;
-  asciiArt: string;
+  thumbnail: string;
   tags: string[];
   delay?: number;
   compact?: boolean;
@@ -19,17 +18,17 @@ const PostCard = ({
   excerpt,
   date,
   readTime,
-  asciiArt,
+  thumbnail,
   tags,
   delay = 0,
   compact = false,
 }: PostCardProps) => {
   const content = (
     <>
-      {/* ASCII Art Header */}
+      {/* Image Header */}
       {!compact && (
         <div className="p-4 pb-0">
-          <AsciiArt art={asciiArt} size="sm" />
+          <img src={`/${thumbnail}`} alt={title} className="w-full h-auto rounded-lg" />
         </div>
       )}
 
@@ -54,7 +53,7 @@ const PostCard = ({
 
         {/* Excerpt */}
         {!compact && (
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-grow line-clamp-3">
+          <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-grow">
             {excerpt}
           </p>
         )}

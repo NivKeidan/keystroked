@@ -2,14 +2,13 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import PostCard from '../components/PostCard';
-import AsciiArt from '../components/AsciiArt';
 import { Badge } from '../components/ui/badge';
 import { ArrowLeft, Facebook, Twitter, Linkedin, Link2 } from 'lucide-react';
 import { type CollectionEntry } from 'astro:content';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, slug, excerpt, pubDate, asciiArt, tags } = Astro.props;
+const { title, slug, excerpt, pubDate, thumbnail, tags } = Astro.props;
 
 // Format date for header
 const headerDate = pubDate.toLocaleDateString('en-US', {
@@ -33,7 +32,7 @@ const relatedPosts = allPosts
       year: 'numeric',
     }),
     readTime: post.data.readTime,
-    asciiArt: post.data.asciiArt,
+    thumbnail: post.data.thumbnail,
     tags: post.data.tags,
   }));
 
@@ -54,7 +53,7 @@ const shareTitle = encodeURIComponent(title);
       <div class="grid md:grid-cols-2 gap-12 items-stretch">
         <div class="w-full h-full">
           <div class="w-full h-full p-8 bg-card rounded-xl border border-border flex items-center justify-center min-h-[400px]">
-            <AsciiArt art={asciiArt} size="lg" />
+            <img src={`/${thumbnail}`} alt={title} class="w-full h-auto rounded-lg" />
           </div>
         </div>
 
@@ -142,7 +141,7 @@ const shareTitle = encodeURIComponent(title);
             excerpt={post.excerpt}
             date={post.date}
             readTime={post.readTime}
-            asciiArt={post.asciiArt}
+            thumbnail={post.thumbnail}
             tags={post.tags}
             compact
           />

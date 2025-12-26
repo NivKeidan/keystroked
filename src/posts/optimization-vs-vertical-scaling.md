@@ -1,23 +1,17 @@
 ---
 slug: optimization-vs-vertical-scaling
-title: Your Elegant Code is Just Vertical Scaling in disguise
+title: Your Elegant Code is Just Vertical Scaling in Disguise
 underlying: Great engineering judgment is about resisting locally satisfying improvements (vertical scaling, micro-optimizations, dogmatic rules) in favor of systemic, context-aware decisions.
-excerpt: Vertical scaling and code optimization seem worlds apart, but they share a common flaw: they often lead to short-term fixes that don't address the underlying problem. This post takes a deep dive into the biases that trick us into thinking we're solving real problems, and how to navigate these waters towards progress.
+excerpt: "Vertical scaling and code optimization seem worlds apart, but they share a common flaw: they often lead to short-term fixes that don't address the underlying problem. This post takes a deep dive into the biases that trick us into thinking we're solving real problems, and how to navigate these waters towards progress."
 pubDate: Dec 17, 2025
 readTime: 6 min read
-asciiArt: |
-   ╭──────────────────────╮
-   │   ⟨ REST API ⟩       │
-   │  ═══════════════════ │
-   │  GET  /users  → 200  │
-   │  POST /data   → 201  │
-   │  PUT  /item   → 200  │
-   ╰──────────────────────╯
+thumbnail: optimization-vs-vertical-scaling.png
 tags:
   - Architecture
   - Philosophy
   - Humans
 ---
+
 
 You’ve just watched the same demo go bad for the second time. The loader is spinning for just a bit too much time, hanging awkwardly after the request was made to the backend. You and everyone else on the call exchange looks as you impatiently wait for the response to come through. Your product manager fills the vacuum with time-buying words, and luckily enough, the potential customer still shows interest at the end of the call. You dodged this one.
 
