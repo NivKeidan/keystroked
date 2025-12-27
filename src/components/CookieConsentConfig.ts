@@ -26,13 +26,14 @@ export const config: CookieConsentConfig = {
         ga4: {
           label: '[Google Analytics 4](https://marketingplatform.google.com/about/analytics/terms/us/)',
           onAccept: () => {
-            console.log('ga4 accepted');
-            window.gtag("consent", "update", {
-              ad_storage: "granted",
-              ad_user_data: "granted",
-              ad_personalization: "granted",
-              analytics_storage: "granted",
-            });
+            if (typeof window !== 'undefined' && window.gtag) {
+              window.gtag("consent", "update", {
+                ad_storage: "granted",
+                ad_user_data: "granted",
+                ad_personalization: "granted",
+                analytics_storage: "granted",
+              });
+            }
           },
           onReject: () => {
             console.log('ga4 rejected');
