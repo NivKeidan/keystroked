@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -13,20 +12,20 @@ import { trackEvent } from "@/lib/analytics";
 
 const services = [
   {
-    title: "PoC",
-    description: "Work directly with founders, understand the core idea, and build a working first version in weeks to validate, pitch to investors, or just move fast",
+    title: "E2E",
+    description: "End-to-end projects - from system architecture all the way to a deployed, working product.",
   },
   {
-    title: "E2E",
-    description: "End-to-end projects — from architecture to deployment",
+    title: "PoC",
+    description: "Work directly with founders to clarify the core idea and deliver a working first version in weeks-ready to validate, pitch to investors, or move fast with confidence.",
   },
   {
     title: "Team+",
-    description: "Team augmentation — deep tech guidance, mentoring, or multiplying dev power",
+    description: "Team augmentation — deep tech guidance, mentoring, or simply multiplying development power.",
   },
   {
     title: "AI",
-    description: "Agentic systems, RAG, prompt engineering",
+    description: "Agentic systems, RAG, and practical prompt engineering for real products.",
   },
   {
     title: "Bash",
