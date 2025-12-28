@@ -40,7 +40,7 @@ const TagsView = ({ services }: { services: { title: string; description: string
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap gap-2 justify-start">
+      <div className="flex flex-wrap gap-4 justify-center">
         {services.map((service, i) => (
           <button
             key={service.title}

@@ -8,6 +8,11 @@ const NewsletterSubscribe = () => {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag("event", "subscribe_click", {
+              location: "homepage",
+      });
+    }
     e.preventDefault();
     setIsSubmitting(true);
     setError("");

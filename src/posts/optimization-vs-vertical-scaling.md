@@ -1,6 +1,6 @@
 ---
 slug: optimization-vs-vertical-scaling
-title: Your Elegant Code is Just Vertical Scaling in Disguise
+title: We Are Scaling Our Code Vertically
 underlying: Great engineering judgment is about resisting locally satisfying improvements (vertical scaling, micro-optimizations, dogmatic rules) in favor of systemic, context-aware decisions.
 excerpt: "Vertical scaling and code optimization seem worlds apart, but they share a common flaw: they often lead to short-term fixes that don't address the underlying problem. This post takes a deep dive into the biases that trick us into thinking we're solving real problems, and how to navigate these waters towards progress."
 pubDate: Dec 17, 2025
