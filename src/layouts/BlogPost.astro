@@ -40,9 +40,16 @@ const relatedPosts = allPosts
 const currentUrl = Astro.url;
 const shareUrl = currentUrl.href;
 const shareTitle = encodeURIComponent(title);
+const siteUrl = Astro.site?.href || currentUrl.origin;
+const thumbnailUrl = `/${thumbnail}`;
 ---
 
-<BaseLayout title={`keystroked | ${title}`}>
+<BaseLayout 
+  title={`keystroked | ${title}`}
+  description={excerpt}
+  image={thumbnailUrl}
+  url={shareUrl}
+>
   <header class="bg-background border-b border-border">
     <div class="container mx-auto px-6 py-12 2xl:w-[1400px]">
       <a href="/" class="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group">

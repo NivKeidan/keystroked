@@ -8,9 +8,21 @@ import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
 }
 
-const { title = 'Keystroked' } = Astro.props;
+const { 
+  title = 'Keystroked',
+  description,
+  image,
+  url,
+} = Astro.props;
+
+const siteUrl = Astro.site?.href || Astro.url.origin;
+const fullImageUrl = image ? (image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`) : undefined;
+const fullUrl = url || Astro.url.href;
 ---
 
 <html lang="en">
@@ -46,6 +58,28 @@ const { title = 'Keystroked' } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    
+    {description && <meta name="description" content={description} />}
+    
+    {fullImageUrl && (
+      <>
+        <meta property="og:image" content={fullImageUrl} />
+        <meta property="og:image:type" content="image/png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={fullImageUrl} />
+      </>
+    )}
+    {description && (
+      <>
+        <meta property="og:description" content={description} />
+        <meta name="twitter:description" content={description} />
+      </>
+    )}
+    <meta property="og:title" content={title} />
+    <meta name="twitter:title" content={title} />
+    <meta property="og:url" content={fullUrl} />
+    <meta property="og:type" content={fullImageUrl ? "article" : "website"} />
+    <meta property="og:site_name" content="keystroked" />
   </head>
   <body>
     <div class="min-h-screen bg-background">
